@@ -4,7 +4,7 @@ import { I18nLang, I18nService } from 'nestjs-i18n';
 @Injectable()
 export class AppService {
   constructor(private readonly i18n: I18nService) {}
-  async getHello(@I18nLang() lang: string): Promise<string> {
+  async getHello(lang: string): Promise<string> {
     const hello: string = await this.i18n.translate('test.HELLO_WORLD', {lang});
     return hello;
   }
