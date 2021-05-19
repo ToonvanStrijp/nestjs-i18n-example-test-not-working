@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { I18nJsonParser, I18nModule } from 'nestjs-i18n';
-import path from 'path';
+import * as path from 'path';
 
 describe('AppController', () => {
   let appController: AppController;
@@ -14,7 +14,7 @@ describe('AppController', () => {
           fallbackLanguage: 'en',
           parser: I18nJsonParser,
           parserOptions: {
-            path: './i18n/',
+            path: path.resolve(__dirname, './i18n/'),
           },
         }),
       ],
@@ -26,8 +26,8 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+    it('should return "Hello World!"', async () => {
+      expect(await appController.getHello()).toBe('Hello World!');
     });
   });
 });
